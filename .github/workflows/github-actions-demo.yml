@@ -20,6 +20,6 @@ jobs:
           dir ${{ github.workspace }}
       - name: Install prerequisites with chocolaty
         run: |
-          choco install choco-build-tools.xml
+          choco install choco-build-tools.config
         working-directory: .\build
       - run: echo "This job's status is ${{ job.status }}."
