@@ -46,7 +46,7 @@ jobs:
           lua5.3 "./Moose Setup/Moose_Create.lua" D "${{ github.sha }}" "./Moose Development/Moose" "./Moose Setup" "./build/artifacts/Moose_Include_Dynamic"
       - name: Run LuaCheck
         run: |
-          luacheck --std=lua51c --config=./.luacheckrc -guras ./build/artifacts/Moose_Include_Static/Moose.lua > ./build/luacheck.log
+          luacheck --std=lua51c --config=./.luacheckrc -guras ./build/artifacts/Moose_Include_Static/Moose.lua
       - name: List files in the repository
         run: |
           tree ${{ github.workspace }}/build/artifacts
