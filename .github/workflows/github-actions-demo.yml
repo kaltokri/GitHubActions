@@ -8,6 +8,11 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: windows-latest
     steps:
+      - uses: ilammy/msvc-dev-cmd@v1
+      - uses: leafo/gh-actions-lua@v10
+        with:
+            luaVersion: "5.1.5"
+      - uses: leafo/gh-actions-luarocks@v4
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
@@ -18,8 +23,4 @@ jobs:
       - name: List files in the repository
         run: |
           dir ${{ github.workspace }}
-      - name: Install prerequisites with chocolaty
-        run: |
-          choco install choco-build-tools.config
-        working-directory: .\build
       - run: echo "This job's status is ${{ job.status }}."
