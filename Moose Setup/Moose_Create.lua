@@ -51,10 +51,14 @@ while( MooseSource ) do
     if MooseDynamicStatic == "S" then
       print( "Load static: " .. MooseFilePath )
       local MooseSourceFile = io.open( MooseFilePath, "r" )
-      local MooseSourceFileText = MooseSourceFile:read( "*a" )
+      if MooseSourceFile ~= nil then
+        local MooseSourceFileText = MooseSourceFile:read( "*a" )
+        LoaderFile:write( MooseSourceFileText )
+        os.exit(1)
+      else
+        print( "ERROR file not found: " .. MooseFilePath )
+      end
       MooseSourceFile:close()
-      
-      LoaderFile:write( MooseSourceFileText )
     end
   end
   
