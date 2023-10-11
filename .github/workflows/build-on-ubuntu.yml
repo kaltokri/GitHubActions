@@ -20,7 +20,7 @@ jobs:
           ls -l ${{ github.workspace }}
       - name: Install Lua 5.3
         run: |
-          sudo apt-get install lua5.3
+          sudo apt-get install lua5.3 liblua5.3-dev
       - name: Check Lua
         run: |
           lua -v
@@ -30,6 +30,9 @@ jobs:
       - name: Check LuaRocks
         run: |
           luarocks --version
+      - name: Install Lua 5.3 Dev for prerequisites for LuaSrcDiet
+        run: |
+          sudo apt-get install liblua5.3-dev
       - name: Install LuaSrcDiet
         run: |
           sudo luarocks install luasrcdiet
