@@ -12,7 +12,7 @@ jobs:
         run: |
             echo "Triggered by:  ${{ github.event_name }}"
             echo "Running on:    ${{ runner.os }}"
-            echo "Branch name:   ${{ github.ref }}
+            echo "Branch name:   ${{ github.ref }}"
             echo "Repository:    ${{ github.repository }}"
             echo "Commit-Id:     ${{ github.sha }}"
       - name: Check out repository code
