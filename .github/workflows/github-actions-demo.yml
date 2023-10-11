@@ -18,16 +18,22 @@ jobs:
       - name: List files in the repository
         run: |
           ls -l ${{ github.workspace }}
-      - name: Install lua 5.3
+      - name: Install Lua 5.3
         run: |
           sudo apt-get install lua5.3
-      - name: Install luarocks
+      - name: Check Lua
+        run: |
+          lua -v
+      - name: Install LuaRocks
         run: |
           sudo apt install luarocks
-      - name: Install luasrcdiet via luarocks
+      - name: Check LuaRocks
         run: |
-          luarocks install luasrcdiet
-      - name: Install luacheck via luarocks
+          luarocks --version
+      - name: Install LuaSrcDiet
         run: |
-          luarocks install luacheck
+          sudo luarocks install luasrcdiet
+      - name: Install LuaCheck
+        run: |
+          sudo luarocks install luacheck
       - run: echo "This job's status is ${{ job.status }}."
