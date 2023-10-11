@@ -8,26 +8,25 @@ jobs:
   Build-Moose:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Build informations
+      - run: |
+            echo "Triggered by:  ${{ github.event_name }}"
+            echo "Running on:    ${{ runner.os }}"
+            echo "Branch name:   ${{ github.ref }}
+            echo "Repository:    ${{ github.repository }}"
+            echo "Commit-Id:     ${{ github.sha }}"
       - name: Check out repository code
         uses: actions/checkout@v4
-      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls -l ${{ github.workspace }}
       - name: Install Lua 5.3
         run: |
           sudo apt-get install lua5.3 liblua5.3-dev
-      - name: Check Lua
+      - name: Check Lua version
         run: |
           lua -v
       - name: Install LuaRocks
         run: |
           sudo apt install luarocks
-      - name: Check LuaRocks
+      - name: Check LuaRocks version
         run: |
           luarocks --version
       - name: Install Lua 5.3 Dev for prerequisites for LuaSrcDiet
@@ -39,4 +38,10 @@ jobs:
       - name: Install LuaCheck
         run: |
           sudo luarocks install luacheck
+      - name: Build includes
+        run: |
+          lua5.3 "./Moose Setup/Moose_Create.lua" S "${{ github.sha }}" "./Moose Development/Moose" "./Moose/Moose Setup" "./build"
+      - name: List files in the repository
+        run: |
+          ls -l ${{ github.workspace }}/build
       - run: echo "This job's status is ${{ job.status }}."
