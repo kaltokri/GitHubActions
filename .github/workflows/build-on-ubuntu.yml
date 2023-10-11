@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build informations
-      - run: |
+        run: |
             echo "Triggered by:  ${{ github.event_name }}"
             echo "Running on:    ${{ runner.os }}"
             echo "Branch name:   ${{ github.ref }}
