@@ -38,10 +38,13 @@ jobs:
       - name: Install LuaCheck
         run: |
           sudo luarocks install luacheck
-      - name: Build includes
+      - name: Build Include Static
         run: |
-          lua5.3 "./Moose Setup/Moose_Create.lua" S "${{ github.sha }}" "./Moose Development/Moose" "./Moose Setup" "./build"
+          lua5.3 "./Moose Setup/Moose_Create.lua" S "${{ github.sha }}" "./Moose Development/Moose" "./Moose Setup" "./build/artifacts/Moose_Include_Static"
+      - name: Build Includes Dynamic
+        run: |
+          lua5.3 "./Moose Setup/Moose_Create.lua" D "${{ github.sha }}" "./Moose Development/Moose" "./Moose Setup" "./build/artifacts/Moose_Include_Dynamic"
       - name: List files in the repository
         run: |
-          ls -l ${{ github.workspace }}/build
+          tree ${{ github.workspace }}/build/artifacts
       - run: echo "This job's status is ${{ job.status }}."
