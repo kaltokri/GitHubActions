@@ -40,7 +40,7 @@ jobs:
           sudo luarocks install luacheck
       - name: Build includes
         run: |
-          lua5.3 "./Moose Setup/Moose_Create.lua" S "${{ github.sha }}" "./Moose Development/Moose" "./Moose/Moose Setup" "./build"
+          lua5.3 "./Moose Setup/Moose_Create.lua" S "${{ github.sha }}" "./Moose Development/Moose" "./Moose Setup" "./build"
       - name: List files in the repository
         run: |
           ls -l ${{ github.workspace }}/build
