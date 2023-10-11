@@ -54,4 +54,10 @@ jobs:
       - name: List files in the repository
         run: |
           tree ${{ github.workspace }}/build/artifacts
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: |
+            build/artifacts/**/*.lua
       - run: echo "This job's status is ${{ job.status }}."
