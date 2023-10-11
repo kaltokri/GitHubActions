@@ -22,8 +22,11 @@ jobs:
         run: |
           choco install choco-build-tools.config --allow-empty-checksums
         working-directory: .\build
-      - name: Install lua libraries with luarocks
+      - name: Install luasrcdiet with luarocks
         run: |
           luarocks install luasrcdiet
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Install luacheck with luarocks
+        run: |
           luarocks install luacheck 0.25.0-1
       - run: echo "This job's status is ${{ job.status }}."
