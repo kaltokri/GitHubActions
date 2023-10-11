@@ -54,9 +54,9 @@ while( MooseSource ) do
       if MooseSourceFile ~= nil then
         local MooseSourceFileText = MooseSourceFile:read( "*a" )
         LoaderFile:write( MooseSourceFileText )
-        os.exit(1)
       else
         print( "ERROR file not found: " .. MooseFilePath )
+        os.exit(1)
       end
       MooseSourceFile:close()
     end
