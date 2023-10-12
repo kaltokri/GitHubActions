@@ -24,19 +24,20 @@ jobs:
           mkdir -p build/Moose_Include_Static
       - name: Install Lua 5.3
         run: |
-          sudo apt-get install lua5.3 liblua5.3-dev
+          sudo apt-get update
+          sudo apt-get install tree lua5.3 liblua5.3-dev -y
       - name: Check Lua version
         run: |
           lua -v
       - name: Install LuaRocks
         run: |
-          sudo apt install luarocks
+          sudo apt install luarocks -y
       - name: Check LuaRocks version
         run: |
           luarocks --version
       - name: Install Lua 5.3 Dev for prerequisites for LuaSrcDiet
         run: |
-          sudo apt-get install liblua5.3-dev
+          sudo apt-get install liblua5.3-dev -y
       - name: Install LuaSrcDiet
         run: |
           sudo luarocks install luasrcdiet
@@ -61,6 +62,7 @@ jobs:
         run: |
           tree ${{ github.workspace }}/build
       - name: Archive production artifacts
+        if: ${{ !env.ACT }} # Skip this step when using act
         uses: actions/upload-artifact@v3
         with:
           name: dist
