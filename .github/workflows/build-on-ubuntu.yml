@@ -54,8 +54,9 @@ jobs:
           luasrcdiet --basic --opt-emptylines ./build/Moose_Include_Static/Moose.lua -o ./build/Moose_Include_Static/Moose_.lua
       - name: Run LuaCheck
         continue-on-error: true
+        # run: luacheck --std=lua51c --config=./.luacheckrc -guras ./build/Moose_Include_Static/Moose.lua
         run: |
-          luacheck --std=lua51c --config=./.luacheckrc -guras ./build/Moose_Include_Static/Moose.lua
+          luacheck --std=lua51c --config=.luacheckrc -guras "Moose Development/Moose"
       - name: List files in the repository
         run: |
           tree ${{ github.workspace }}/build
