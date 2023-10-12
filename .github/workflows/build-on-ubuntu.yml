@@ -18,6 +18,10 @@ jobs:
             echo "Commit-Id:     ${{ github.sha }}"
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Prepare build output folders
+        run: |
+          mkdir build/Moose_Include_Dynamic
+          mkdir build/Moose_Include_Static
       - name: Install Lua 5.3
         run: |
           sudo apt-get install lua5.3 liblua5.3-dev
@@ -41,17 +45,17 @@ jobs:
           sudo luarocks install luacheck
       - name: Build Include Static
         run: |
-          lua5.3 "./Moose Setup/Moose_Create.lua" S "${{ github.sha }}" "./Moose Development/Moose" "./Moose Setup" "./build/artifacts/Moose_Include_Static"
+          lua5.3 "./Moose Setup/Moose_Create.lua" S "${{ github.sha }}" "./Moose Development/Moose" "./Moose Setup" "./build/Moose_Include_Static"
       - name: Build Includes Dynamic
         run: |
-          lua5.3 "./Moose Setup/Moose_Create.lua" D "${{ github.sha }}" "./Moose Development/Moose" "./Moose Setup" "./build/artifacts/Moose_Include_Dynamic"
+          lua5.3 "./Moose Setup/Moose_Create.lua" D "${{ github.sha }}" "./Moose Development/Moose" "./Moose Setup" "./build/Moose_Include_Dynamic"
       - name: Run LuaSrcDiet
         run: |
-          luasrcdiet --basic --opt-emptylines ./build/artifacts/Moose_Include_Static/Moose.lua -o ./build/artifacts/Moose_Include_Static/Moose_.lua
+          luasrcdiet --basic --opt-emptylines ./build/Moose_Include_Static/Moose.lua -o ./build/Moose_Include_Static/Moose_.lua
       - name: Run LuaCheck
         continue-on-error: true
         run: |
-          luacheck --std=lua51c --config=./.luacheckrc -guras ./build/artifacts/Moose_Include_Static/Moose.lua
+          luacheck --std=lua51c --config=./.luacheckrc -guras ./build/Moose_Include_Static/Moose.lua
       - name: List files in the repository
         run: |
           tree ${{ github.workspace }}/build/artifacts
@@ -60,5 +64,5 @@ jobs:
         with:
           name: dist
           path: |
-            build/artifacts/**/*.lua
+            build/**/*.lua
       - run: echo "This job's status is ${{ job.status }}."
