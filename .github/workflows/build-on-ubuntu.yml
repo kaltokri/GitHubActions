@@ -20,8 +20,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Prepare build output folders
         run: |
-          mkdir build/Moose_Include_Dynamic
-          mkdir build/Moose_Include_Static
+          mkdir -p build/Moose_Include_Dynamic
+          mkdir -p build/Moose_Include_Static
       - name: Install Lua 5.3
         run: |
           sudo apt-get install lua5.3 liblua5.3-dev
