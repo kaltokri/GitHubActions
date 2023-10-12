@@ -58,7 +58,7 @@ jobs:
           luacheck --std=lua51c --config=./.luacheckrc -guras ./build/Moose_Include_Static/Moose.lua
       - name: List files in the repository
         run: |
-          tree ${{ github.workspace }}/build/artifacts
+          tree ${{ github.workspace }}/build
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
         with:
