@@ -56,7 +56,7 @@ jobs:
         continue-on-error: true
         # run: luacheck --std=lua51c --config=./.luacheckrc -guras ./build/Moose_Include_Static/Moose.lua
         run: |
-          luacheck --std=lua51c --config=.luacheckrc -guras "Moose Development/Moose"
+          luacheck --std=lua51c --config=.luacheckrc -gurasq "Moose Development/Moose"
       - name: List files in the repository
         run: |
           tree ${{ github.workspace }}/build
